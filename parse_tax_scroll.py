@@ -9,7 +9,7 @@ from pdfquery.cache import FileCache
 from pyquery import PyQuery as pq
 
 INPUT_PDF_FILE = 'YANCEY COUNTY TAX SCROLL 2024.pdf'
-OUTPUT_JSON_FILE = 'scroll.json'
+OUTPUT_JSON_FILE = 'scroll2024.json'
 OUTPUT_SAMPLE = 0.01
 # PAGES = list(range(0, 9))
 # PAGES = [2, 9, 41]
