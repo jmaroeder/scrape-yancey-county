@@ -7,8 +7,9 @@ from scrapy.http import Response
 from scrapy.shell import inspect_response
 
 PARCEL_IDS_FILENAME = 'parcel_ids.txt'
-MAX_PARCEL_IDS = -1
-RANDOM_PARCEL_ID = True
+MAX_PARCEL_IDS = -1  # -1 = no limit
+RANDOM_PARCEL_ID = False
+STARTING_PARCEL_ID = None
 START_URL = 'https://secure.webtaxpay.com/?county=yancey&state=NC'
 
 LABEL_TO_SNAKE_RE = re.compile(r'[^a-z]+')
@@ -31,6 +32,9 @@ class WebtaxpaySpider(scrapy.Spider):
 
         if RANDOM_PARCEL_ID:
             random.shuffle(lines)
+        lines = list(map(lambda l: l.strip(), filter(lambda l: l.strip(), lines)))
+        if STARTING_PARCEL_ID:
+            lines = lines[:lines.index(STARTING_PARCEL_ID)]
 
         for line in lines:
             if trimmed := line.strip():
